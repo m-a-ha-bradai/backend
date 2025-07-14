@@ -5,6 +5,11 @@ const app = express();
 //
 const cors = require('cors')
 
+// pour le depoloyment front : 
+const path = require('path'); // Ajout de l'importation de path
+
+// pour le depoloyment front : 
+
 //config dotenv
 dotenv.config()
 
@@ -216,7 +221,7 @@ res.status(500).json({ error: "Erreur lors du traitement de la question"
 });
 }
 });
-// Route d'API pour le chatbot
+// //////////////////////////Route d'API pour le chatbot
 app.post("/api/chat", async (req, res) => {
 const userMessage = req.body.message;
 try {
@@ -229,6 +234,27 @@ console.error("Erreur Gemini :", err);
 res.status(500).json({ error: "Erreur du chatbot" });
 }
 });
+
+
+
+
+// pour le depoloyment front : 
+
+//dist reactjs
+app.use(express.static(path.join(__dirname, './client/build'))); // Route pour
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname,
+'./client/build/index.html')); });
+
+
+
+// pour le depoloyment front : 
+
+
+
+
+
+
+
 // Lancement du serveur
 app.listen(process.env.PORT, () => console.log(`Serveur démarré sur
 http://localhost:${process.env.PORT}`));

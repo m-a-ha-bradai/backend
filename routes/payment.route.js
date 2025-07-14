@@ -26,3 +26,7 @@ res.status(500).json({ error: e.message })
 }
 });
 module.exports = router;
+// route POST qui reçoit les détails du panier dans req.body.cartDetails
+//crée une session de paiement Stripe Checkout avec ces articles,
+//  puis renvoie l'ID de la session au client
+// . Le client pourra ensuite utiliser cet ID pour rediriger l'utilisateur vers la page de paiement Stripe.
