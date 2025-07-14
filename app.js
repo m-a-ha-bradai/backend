@@ -31,10 +31,10 @@ mongoose.connect(process.env.DATABASECLOUD)
 .catch(err => { console.log("Unable to connect to database", err);
 process.exit(); });
 // requête
-app.get("/",(req,res)=>{
+/*app.get("/",(req,res)=>{
 res.send("bonjour");
 
-});
+});*/    // on evite lorsque on ajoute la partie la partie deploymentfront 
 
 //Ajout du routeur payment
 const paymentRouter =require("./routes/payment.route.js");
