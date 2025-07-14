@@ -33,7 +33,7 @@ process.exit(); });
 // requête
 app.get("/",(req,res)=>{
 res.send("bonjour");
-5
+
 });
 
 //Ajout du routeur payment
@@ -242,8 +242,7 @@ res.status(500).json({ error: "Erreur du chatbot" });
 
 //dist reactjs
 app.use(express.static(path.join(__dirname, './client/build'))); // Route pour
-app.get('*', (req, res) => { res.sendFile(path.join(__dirname,
-'./client/build/index.html')); });
+app.get('/{*any}', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
 
 
 
