@@ -2,7 +2,10 @@ const express=require('express');
 const mongoose =require("mongoose")
 const dotenv =require('dotenv')
 const app = express();
+
 //
+
+
 const cors = require('cors')
 
 // pour le depoloyment front : 
@@ -24,6 +27,10 @@ app.use(cors( {
 app.use(express.json());
 
 
+const userRoutes = require('./routes/user.route');  /////////////////////////////
+
+app.use('/api/users', userRoutes);  ////////////////////////////////////////////////
+
 
 // Connexion à la base données
 mongoose.connect(process.env.DATABASECLOUD)
@@ -35,6 +42,16 @@ process.exit(); });
 res.send("bonjour");
 
 });*/    // on evite lorsque on ajoute la partie la partie deploymentfront 
+
+
+
+
+
+
+
+
+
+
 
 //Ajout du routeur payment
 const paymentRouter =require("./routes/payment.route.js");
