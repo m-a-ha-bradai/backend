@@ -2,6 +2,7 @@ const express=require('express');
 const mongoose =require("mongoose")
 const dotenv =require('dotenv')
 const app = express();
+
 //
 const cors = require('cors')
 
@@ -41,6 +42,8 @@ const paymentRouter =require("./routes/payment.route.js");
 app.use('/api/payment', paymentRouter);
 
 
+const userRouter =require("./routes/user.route")
+app.use('/api/users', userRouter);
 
 //Ajout du routeur des catégories
 const categorieRouter = require("./routes/categorie.route");
