@@ -3,6 +3,8 @@ const router = express.Router();
 const Article=require("../models/article")
 
 const Scategorie = require("../models/scategorie");
+const { authorizeRoles } = require("../middleware/authorizeRoles");
+const { verifyToken } = require("../middleware/verifytoken");
 
 
 
@@ -77,15 +79,22 @@ res.status(404).json({ message: error.message });
 
 
 // afficher la liste des articles.
-router.get('/', async (req, res, )=> {
-try {
-const articles = await Article.find({}, null, {sort: {'_id': -
-1}}).populate("scategorieID").exec();
-res.status(200).json(articles);
-} catch (error) {
-res.status(404).json({ message: error.message });
-}
-});
+router.get(
+  "/",//verifyToken,// authorizeRoles("admin", "superAdmin", "user"), 
+  async (req, res) => {
+    try {
+      const article = await Article.find({}, null, {
+        sort: { _id: -1 },
+      })
+        .populate("scategorieID")
+        .exec();
+
+      res.status(200).json(article);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+  }
+);
 // créer un nouvel article
 router.post('/', async (req, res) => {
 const nouvarticle = new Article(req.body)

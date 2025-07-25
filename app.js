@@ -42,6 +42,16 @@ const paymentRouter =require("./routes/payment.route.js");
 app.use('/api/payment', paymentRouter);
 
 
+//routes des orders 
+const orderRouter =require("./routes/order.route")
+app.use('/api/orders', orderRouter);
+
+//routes  des headers 
+const headerRoutes = require('./routes/header.route');
+app.use('/api/headers', headerRoutes);
+
+
+//route des users 
 const userRouter =require("./routes/user.route")
 app.use('/api/users', userRouter);
 

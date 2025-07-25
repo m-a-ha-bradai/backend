@@ -283,5 +283,33 @@ refreshToken: newRefreshToken
 // se connecter // se connecter  // se connecter
 
 
+// login pour client
+const getuserBYEmailClient = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: "Tous les champs sont obligatoires" });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "Client introuvable" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: "Email ou mot de passe invalide" });
+    }
+
+    const token = jwt.sign({ user }, process.env.TOKEN, { expiresIn: '60s' });
+    res.status(200).json({ success: true, token, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+router.post('/loginclient', getuserBYEmailClient);
+
+
 
 module.exports = router;  
